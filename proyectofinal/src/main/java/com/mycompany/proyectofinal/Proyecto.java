@@ -1,29 +1,77 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.proyectofinal;
-/**
- *
- * @author SAlA-9
- */
+
+import java.util.Scanner;
 
 public class Proyecto {
-    long id;
-    String name_proyect;
-
-    public Proyecto(long id, String name_proyect) {
-        this.id = id;
-        this.name_proyect = name_proyect;
-    }
-
-    public void verProyecto() {
-        System.out.println("Nombre: "+ name_proyect +"");
+    String nombre;
+    String ubicacion;
+    String estado;
+    int torres;
+    
+    public Proyecto() {
+        this.nombre = "x";
+        this.ubicacion = "x";
+        this.estado = "x";
+        this.torres = 4;
     }
     
+    // --------- PARTE DEL STAFF --------- //
+    private void RegistrarProyecto() {
+
+    }
+    private void ModificarProyecto() {
+        
+    }
+    private void EliminarProyecto(double id) {
+        
+    }
+    private void IniciarSesion() {
+        Scanner sc = new Scanner(System.in); 
+        System.out.print("Coloque su correo: ");
+        String email = sc.nextLine();
+        
+        sc = new Scanner(System.in); 
+        System.out.print("Coloque su contraseña: ");
+        String password = sc.nextLine();
+        
+        System.out.println();
+        System.out.println("Has sido iniciado sesión con éxito.");
+    }
+    // --------- PARTE DEL STAFF --------- //
+    
+    
+    
+    
+    
+    
+    // PARTE DEL CLIENTE //
+    public void SolicitarPago() {
+        
+    }
+    // PARTE DEL CLIENTE //
+    
+    
+    
     public static void main(String[] args) {
-        Proyecto p = new Proyecto(1, "Nemesis");
-        p.verProyecto();
-        ConexionBD conexion = new ConexionBD(1, "Nemesis");
+        System.out.print("Bienvenid@");
+        
+        int option;
+            
+        do {
+            System.out.println();
+            System.out.println();
+            Scanner sc = new Scanner(System.in); 
+            System.out.print("Elige una opción:\n1) Iniciar Sesión\n2) Solicitar Pago\nEliges: ");
+            option = sc.nextInt();
+        } while (option > 2 || option < 1);
+        System.out.println();
+        
+        if (option == 2) new Proyecto().SolicitarPago();
+        else new Proyecto().IniciarSesion();
+
+        
+        //Proyecto p = new Proyecto(1, name_proyect);
+        //p.VerProyecto();
+        //ConexionBD conexion = new ConexionBD(1, name_proyect);
     }
 }
