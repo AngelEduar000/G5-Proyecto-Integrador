@@ -13,8 +13,10 @@ public class Proyecto {
         this.torres = 4;
     }
     
-    // --------- PARTE DEL STAFF --------- //
     private void MostrarDashboard() {
+        
+    }
+    private void CrearProyecto() {
         
     }
     private void RegistrarProyecto() {
@@ -26,5 +28,4 @@ public class Proyecto {
     private void EliminarProyecto(double id) {
         
     }
-    // --------- PARTE DEL STAFF --------- //
 }

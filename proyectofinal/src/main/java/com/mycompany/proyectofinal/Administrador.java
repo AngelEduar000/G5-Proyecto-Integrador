@@ -1,9 +1,9 @@
 package com.mycompany.proyectofinal;
 
 public class Administrador {
-    private void CrearProyecto() {
+    public void IngresarDatos() {
         
-    }
+    } 
     private void ManejarCrearProyecto() {
         
     }
