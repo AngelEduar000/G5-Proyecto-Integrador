@@ -16,6 +16,9 @@ public class Proyecto {
     }
     
     // --------- PARTE DEL STAFF --------- //
+    private void MostrarDashboard() {
+        
+    }
     private void RegistrarProyecto() {
 
     }
@@ -25,7 +28,10 @@ public class Proyecto {
     private void EliminarProyecto(double id) {
         
     }
-    private void IniciarSesion() {
+    private void VerificarCredenciales() {
+        
+    }
+    public void IniciarSesion() {
         Scanner sc = new Scanner(System.in); 
         System.out.print("Coloque su correo: ");
         String email = sc.nextLine();
@@ -35,43 +41,10 @@ public class Proyecto {
         String password = sc.nextLine();
         
         System.out.println();
-        System.out.println("Has sido iniciado sesión con éxito.");
+        System.out.println(".....");
+    }
+    private void ManejarInicioSesion() {
+        
     }
     // --------- PARTE DEL STAFF --------- //
-    
-    
-    
-    
-    
-    
-    // PARTE DEL CLIENTE //
-    public void SolicitarPago() {
-        
-    }
-    // PARTE DEL CLIENTE //
-    
-    
-    
-    public static void main(String[] args) {
-        System.out.print("Bienvenid@");
-        
-        int option;
-            
-        do {
-            System.out.println();
-            System.out.println();
-            Scanner sc = new Scanner(System.in); 
-            System.out.print("Elige una opción:\n1) Iniciar Sesión\n2) Solicitar Pago\nEliges: ");
-            option = sc.nextInt();
-        } while (option > 2 || option < 1);
-        System.out.println();
-        
-        if (option == 2) new Proyecto().SolicitarPago();
-        else new Proyecto().IniciarSesion();
-
-        
-        //Proyecto p = new Proyecto(1, name_proyect);
-        //p.VerProyecto();
-        //ConexionBD conexion = new ConexionBD(1, name_proyect);
-    }
 }
