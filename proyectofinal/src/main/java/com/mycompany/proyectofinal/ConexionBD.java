@@ -1,12 +1,21 @@
 package com.mycompany.proyectofinal;
 
-public class ConexionBD {
-    long id;
-    String name_proyect;
+import java.util.Scanner;
 
-    public ConexionBD(long id, String name_proyect) {
-        this.id = id;
-        this.name_proyect = name_proyect;
-        System.out.println("Conectado al proyecto: " + name_proyect);
+public class ConexionBD {
+    private void ManejarInicioSesion(String email, String password) {
+        System.out.println("Esta en ManejarInicioSesion");
+    }
+    public void IniciarSesion() {
+        Scanner sc = new Scanner(System.in); 
+        System.out.print("Coloque su correo: ");
+        String email = sc.nextLine();
+        
+        sc = new Scanner(System.in); 
+        System.out.print("Coloque su contraseña: ");
+        String password = sc.nextLine();
+        
+        System.out.println();
+        new ConexionBD().ManejarInicioSesion(email, password);
     }
 }

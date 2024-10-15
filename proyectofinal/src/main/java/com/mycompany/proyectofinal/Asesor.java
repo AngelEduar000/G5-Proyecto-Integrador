@@ -1,6 +1,9 @@
 package com.mycompany.proyectofinal;
 
 public class Asesor {
+    public void IngresarDatos() {
+        
+    } 
     public void RegistrarVenta() {
         
     }

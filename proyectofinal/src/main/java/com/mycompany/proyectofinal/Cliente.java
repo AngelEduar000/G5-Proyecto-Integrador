@@ -1,9 +1,6 @@
 package com.mycompany.proyectofinal;
 
 public class Cliente {
-    public void IngresarDatos() {
-        
-    } 
     public void SolicitarPago() {
         
     }

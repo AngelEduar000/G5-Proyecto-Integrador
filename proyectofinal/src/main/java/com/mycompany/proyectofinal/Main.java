@@ -37,7 +37,7 @@ public class Main {
                 option = sc.nextInt();
             } while (option != 1);
             System.out.println();
-            new Proyecto().IniciarSesion();
+            new ConexionBD().IniciarSesion();
         }
 
         //Proyecto p = new Proyecto(1, name_proyect);
