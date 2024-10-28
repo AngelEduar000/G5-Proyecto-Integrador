@@ -1,0 +1,284 @@
+CREATE SEQUENCE proyecto_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+CREATE TABLE PROYECTO (
+ID_PROYECTO NUMBER CONSTRAINT id_pr_pk PRIMARY KEY,
+NOMBRE VARCHAR2(50) CONSTRAINT nom_pr_nn NOT NULL,
+NUMERO_TORRES NUMBER CONSTRAINT num_pr_nn NOT NULL
+);
+
+
+CREATE TRIGGER proyecto_trigger
+BEFORE INSERT ON PROYECTO
+FOR EACH ROW
+BEGIN
+    IF :NEW.ID_PROYECTO IS NULL THEN
+        SELECT proyecto_seq.NEXTVAL INTO :NEW.ID_PROYECTO FROM dual;
+    END IF;
+END;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE SEQUENCE torre_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+CREATE TABLE TORRE (
+    ID_TORRE NUMBER CONSTRAINT id_tr_pk PRIMARY KEY,
+    ID_PROYECTO NUMBER CONSTRAINT fk_pr_nn NOT NULL,
+    NumeroTorre NUMBER NOT NULL,
+    NumeroApartamentos NUMBER NOT NULL,
+    CONSTRAINT fk_pr FOREIGN KEY (ID_PROYECTO) REFERENCES PROYECTO (ID_PROYECTO) 
+);
+
+CREATE TRIGGER torre_trigger
+BEFORE INSERT ON TORRE
+FOR EACH ROW
+BEGIN
+    IF :NEW.ID_TORRE IS NULL THEN
+        SELECT torre_seq.NEXTVAL INTO :NEW.ID_TORRE FROM dual;
+    END IF;
+END;
+/
+________________________________________________________________________________________________________________________________________________________________________
+
+CREATE SEQUENCE apartamento_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+CREATE TABLE APARTAMENTO (
+    ID_APARTAMENTO NUMBER CONSTRAINT id_ap_pk PRIMARY KEY,
+    ID_TORRE NUMBER CONSTRAINT id_ap_nn NOT NULL,                            
+    Numero_Apartamento NUMBER CONSTRAINT na_ap_nn NOT NULL,
+    Valor_Apartamento NUMBER CONSTRAINT va_ap_nn NOT NULL,
+    Tipo_Unidad VARCHAR2(50) CONSTRAINT tu_ap_nn NOT NULL,                                
+    Area NUMBER CONSTRAINT ar_ap_nn NOT NULL,
+    Matricula VARCHAR2(50) CONSTRAINT mu_ap_nn NOT NULL,
+    Fecha_Escritura DATE,
+    Vendedor VARCHAR2(100),
+    CONSTRAINT fk_tr FOREIGN KEY (ID_TORRE) REFERENCES TORRE (ID_TORRE)
+);
+
+
+
+
+CREATE TRIGGER apartemento_trigger
+BEFORE INSERT ON APARTAMENTO
+FOR EACH ROW
+BEGIN
+    IF :NEW.ID_APARTAMENTO IS NULL THEN
+        SELECT apartamento_seq.NEXTVAL INTO :NEW.ID_APARTAMENTO FROM dual;
+    END IF;
+END;
+/
+
+
+__________________________________________________________________________________________________________________________________________________________________________
+
+
+CREATE TABLE CLIENTE (
+    CEDULA NUMBER CONSTRAINT id_cl_pk PRIMARY KEY,
+    Nombre VARCHAR2(100) CONSTRAINT nom_cl_nn NOT NULL,
+    SISBEN VARCHAR2(50),
+    Subsidio_Ministerio VARCHAR2(50),
+    Direccion VARCHAR2(200) CONSTRAINT dir_cl_nn NOT NULL,
+    Telefono VARCHAR2(20) CONSTRAINT tel_cl_nn NOT NULL,
+    Correo_Electronico VARCHAR2(100)
+);
+
+
+
+CREATE TABLE CLIENTE (
+    CEDULA NUMBER CONSTRAINT id_cl_pk PRIMARY KEY,
+    Nombre VARCHAR2(100) CONSTRAINT nom_cl_nn NOT NULL,
+    SISBEN VARCHAR2(50),
+    Subsidio_Ministerio VARCHAR2(50),
+    Direccion VARCHAR2(200) CONSTRAINT dir_cl_nn NOT NULL,
+    Telefono VARCHAR2(20) CONSTRAINT tel_cl_nn NOT NULL,
+    Correo_Electronico VARCHAR2(100)
+);
+
+
+____________________________________________________________________________________________________________________________________________________________________________
+
+CREATE TABLE ASESOR (
+    Cedula NUMBER CONSTRAINT ced_ase_pk PRIMARY KEY,
+    Nombre VARCHAR2(100) CONSTRAINT nom_ase_nn NOT NULL,
+    Direccion VARCHAR2(200) CONSTRAINT dir_ase_nn NOT NULL,
+    Telefono VARCHAR2(20) CONSTRAINT tel_ase_nn NOT NULL,
+    Correo_Electronico VARCHAR2(100)
+);
+
+
+___________________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+CREATE SEQUENCE venta_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+CREATE TABLE VENTA (
+    ID_VENTA NUMBER CONSTRAINT id_ven_pk PRIMARY KEY,
+    ID_APARTAMENTO NUMBER CONSTRAINT id_ap_ven_nn NOT NULL,
+    CEDULA_CLIENTE NUMBER CONSTRAINT ced_ven_nn NOT NULL,
+    Precio_Total_Venta NUMBER CONSTRAINT pre_ven_nn NOT NULL,
+    Numero_Cuotas NUMBER CONSTRAINT num_ven_nn NOT NULL,
+    Intereses NUMBER CONSTRAINT int_ven_nn NOT NULL,
+    CONSTRAINT fk_ID_APARTAMENTO FOREIGN KEY (ID_APARTAMENTO) REFERENCES APARTAMENTO (ID_APARTAMENTO),
+    CONSTRAINT fk_CEDULA_CLIENTE FOREIGN KEY (CEDULA_CLIENTE) REFERENCES CLIENTE (CEDULA)
+);
+
+
+
+CREATE TABLE VENTA (
+    ID_VENTA NUMBER CONSTRAINT id_ven_pk PRIMARY KEY,
+    ID_APARTAMENTO NUMBER CONSTRAINT id_ap_ven_nn NOT NULL,
+    CEDULA_CLIENTE NUMBER CONSTRAINT ced_ven_nn NOT NULL,
+    Precio_Total_Venta NUMBER CONSTRAINT pre_ven_nn NOT NULL,
+    Numero_Cuotas NUMBER CONSTRAINT num_ven_nn NOT NULL,
+    Intereses NUMBER CONSTRAINT int_ven_nn NOT NULL,
+    CONSTRAINT fk_ID_APARTAMENTO FOREIGN KEY (ID_APARTAMENTO) REFERENCES APARTAMENTO (ID_APARTAMENTO),
+    CONSTRAINT fk_CEDULA_CLIENTE FOREIGN KEY (CEDULA_CLIENTE) REFERENCES CLIENTE (CEDULA)
+);
+
+
+CREATE TRIGGER venta_trigger
+BEFORE INSERT ON VENTA
+FOR EACH ROW
+BEGIN
+    IF :NEW.ID_VENTA IS NULL THEN
+        SELECT venta_seq.NEXTVAL INTO :NEW.ID_VENTA FROM dual;
+    END IF;
+END;
+/
+
+
+
+_____________________________________________________________________________________________________________________________________________________________________________________
+
+CREATE SEQUENCE pago_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+CREATE TABLE PAGO (
+    ID_PAGO NUMBER CONSTRAINT id_pag_pk PRIMARY KEY,
+    ID_VENTA NUMBER CONSTRAINT id_ven_pag_nn NOT NULL,
+    CEDULA_CLIENTE NUMBER CONSTRAINT ced_cli_pag_nn NOT NULL,
+    CEDULA_ASESOR NUMBER CONSTRAINT ced_ase_pag_nn NOT NULL,
+    ValorPago NUMBER CONSTRAINT val_pag_nn NOT NULL,
+    FechaPago DATE CONSTRAINT fec_pag_nn NOT NULL,
+    CONSTRAINT fk_ID_VENTA FOREIGN KEY (ID_VENTA) REFERENCES VENTA (ID_VENTA),
+    CONSTRAINT fk_CEDULA_CLIENTE FOREIGN KEY (CEDULA_CLIENTE) REFERENCES CLIENTE (CEDULA)
+    CONSTRAINT fk_CEDULA_ASESOR FOREIGN KEY (CEDULA_ASESOR) REFERENCES ASESOR (CEDULA)
+);
+
+
+CREATE TABLE PAGO (
+    ID_PAGO NUMBER CONSTRAINT id_pag_pk PRIMARY KEY,
+    ID_VENTA NUMBER CONSTRAINT id_ven_pag_nn NOT NULL,
+    CEDULA_CLIENTE NUMBER CONSTRAINT ced_cli_pag_nn NOT NULL,
+    CEDULA_ASESOR NUMBER CONSTRAINT ced_ase_pag_nn NOT NULL,
+    ValorPago NUMBER CONSTRAINT val_pag_nn NOT NULL,
+    FechaPago DATE CONSTRAINT fec_pag_nn NOT NULL,
+    CONSTRAINT fk_ID_VENTA FOREIGN KEY (ID_VENTA) REFERENCES VENTA (ID_VENTA),
+    CONSTRAINT fk_CEDULA_CLIENTE_PAGO FOREIGN KEY (CEDULA_CLIENTE) REFERENCES CLIENTE (CEDULA),
+    CONSTRAINT fk_CEDULA_ASESOR FOREIGN KEY (CEDULA_ASESOR) REFERENCES ASESOR (CEDULA)
+);
+
+
+
+CREATE TRIGGER pago_trigger
+BEFORE INSERT ON PAGO
+FOR EACH ROW
+BEGIN
+    IF :NEW.ID_PAGO IS NULL THEN
+        SELECT pago_seq.NEXTVAL INTO :NEW.ID_PAGO FROM dual;
+    END IF;
+END;
+/
+
+
+__________________________________________________________________________________________________
+
+CREATE TABLE USUARIO_ASESOR (
+CEDULA_ASESOR NUMBER CONSTRAINT ced_usa_pk PRIMARY KEY,
+PASSWORD VARCHAR2(50) CONSTRAINT con_usa_nn NOT NULL,
+CONSTRAINT fk_cedula_asesor_usuario FOREIGN KEY (CEDULA_ASESOR) REFERENCES ASESOR (CEDULA)
+);
+
+_______________________________________________________________________________________________
+
+CREATE TABLE USUARIO_ADMINISTRADOR (
+CEDULA_ADMINISTRADOR NUMBER CONSTRAINT ced_ad_usa_pk PRIMARY KEY,
+PASSWORD VARCHAR2(50) CONSTRAINT con_us_ad_nn NOT NULL
+);
+
+ALTER TABLE CLIENTE
+MODIFY (
+    NOMBRE VARCHAR2(50),
+    DIRECCION VARCHAR2(50),
+    CORREO_ELECTRONICO VARCHAR2(70)
+);
+
+
+
+INSERT INTO USUARIO_ASESOR (CEDULA_ASESOR, PASSWORD) VALUES (1001234567, 'Pass1234');
+INSERT INTO USUARIO_ASESOR (CEDULA_ASESOR, PASSWORD) VALUES (1002345678, 'MyPassword89');
+INSERT INTO USUARIO_ASESOR (CEDULA_ASESOR, PASSWORD) VALUES (1003456789, 'SecurePass90');
+INSERT INTO USUARIO_ASESOR (CEDULA_ASESOR, PASSWORD) VALUES (1004567890, 'Qwerty2023');
+INSERT INTO USUARIO_ASESOR (CEDULA_ASESOR, PASSWORD) VALUES (1005678901, 'SafePass2023');
+
+
+
+
+
+INSERT INTO CLIENTE (CEDULA, NOMBRE, SISBEN, SUBSIDIO_MINISTERIO, DIRECCION, TELEFONO, CORREO_ELECTRONICO)
+VALUES (1098765432, 'Juan Pérez', 'Nivel 1', 'Vivienda', 'Calle 10 # 15-30', '3001234567', 'juan.perez@email.com');
+INSERT INTO CLIENTE (CEDULA, NOMBRE, SISBEN, SUBSIDIO_MINISTERIO, DIRECCION, TELEFONO, CORREO_ELECTRONICO)
+VALUES (1087654321, 'María Gómez', 'Nivel 2', 'Educación', 'Carrera 5 # 20-45', '3102345678', 'maria.gomez@email.com');
+INSERT INTO CLIENTE (CEDULA, NOMBRE, SISBEN, SUBSIDIO_MINISTERIO, DIRECCION, TELEFONO, CORREO_ELECTRONICO)
+VALUES (1076543210, 'Carlos Ramírez', 'Nivel 3', 'Salud', 'Avenida 3 # 10-12', '3203456789', 'carlos.ramirez@email.com');
+INSERT INTO CLIENTE (CEDULA, NOMBRE, SISBEN, SUBSIDIO_MINISTERIO, DIRECCION, TELEFONO, CORREO_ELECTRONICO)
+VALUES (1065432109, 'Ana Torres', 'Nivel 1', 'Vivienda', 'Carrera 7 # 25-55', '3304567890', 'ana.torres@email.com');
+INSERT INTO CLIENTE (CEDULA, NOMBRE, SISBEN, SUBSIDIO_MINISTERIO, DIRECCION, TELEFONO, CORREO_ELECTRONICO)
+VALUES (1054321098, 'Laura Ortiz', 'Nivel 2', 'Alimentación', 'Calle 12 # 30-40', '3405678901', 'laura.ortiz@email.com');
+
+
+CREATE TABLE USUARIOS (
+USUARIO VARCHAR2(50) CONSTRAINT usu_usua_pk PRIMARY KEY,
+PASSWORD VARCHAR2(50) CONSTRAINT pas_usua_nn NOT NULL,
+TIPO_USUARIO VARCHAR2(15) CONSTRAINT tip_usua_nn NOT NULL
+);
+
+
+
+INSERT INTO USUARIOS (USUARIO, CONTRASENA, TIPO_USUARIO) VALUES ('1001234567', 'Pass1234', 'ADMINISTRADOR');
+
+
+ALTER TABLE USUARIO_ASESOR RENAME COLUMN CEDULA_ASESOR TO CEDULA;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
