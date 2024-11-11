@@ -93,7 +93,7 @@ public class inicioSesion extends javax.swing.JFrame {
         txtPass.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 500, 250, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\unise\\Documents\\NetBeansProjects\\G5-Proyecto-Integrador\\ProyectoIntegrador\\ProyectoIntegrador\\src\\imagenes\\Diseño sin título (14).png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título (14).png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-2, -4, 1040, 790));
 
         jMenu3.setText("File");
@@ -113,53 +113,55 @@ public class inicioSesion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
+        
         String usuario = txtUsuario.getText();
         String password = txtPass.getText();
 
         if (!usuario.equals("") && !password.equals("")) {
             try {
                 // Preparar la consulta para verificar si el usuario es asesor
-                PreparedStatement psAsesor = cn.prepareStatement("SELECT * FROM USUARIO_ASESOR WHERE CEDULA = '"+usuario+"' AND CONTRASENA = '"+password+"'");
-                ResultSet rsAsesor = psAsesor.executeQuery();
-
-                if (rsAsesor.next()) {
-                    // Si se encuentra un registro en la tabla asesor, redirigir a la vista asesor
-                    this.setVisible(false); // Cerrar la ventana de inicio de sesión
-                    vistaAsesor vas = new vistaAsesor(); // Abrir la vista del asesor
-                    vas.setVisible(true);
-                } else {
-                    // Si no es asesor, verificar si es administrador
-                    PreparedStatement psAdmin = cn.prepareStatement("SELECT * FROM USUARIO_ADMINISTRADOR WHERE CEDULA = '"+usuario+"' AND CONTRASENA = '"+password+"'");
-                    ResultSet rsAdmin = psAdmin.executeQuery();
-
-                    if (rsAdmin.next()) {
-                        // Si se encuentra un registro en la tabla administrador, redirigir a la vista administrador
-                        this.setVisible(false); // Cerrar la ventana de inicio de sesión
-                        vistaAdministrador vad = new vistaAdministrador(); // Abrir la vista del administrador
-                        vad.setVisible(true);
-                    } else {
-                        // Si no se encontró en ninguna tabla
-                        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+                String sqlAsesor = "SELECT * FROM USUARIO_ASESOR WHERE CEDULA = ? AND CONTRASENA = ?";
+                try (PreparedStatement psAsesor = cn.prepareStatement(sqlAsesor)) {
+                    psAsesor.setString(1, usuario);
+                    psAsesor.setString(2, password);
+                    try (ResultSet rsAsesor = psAsesor.executeQuery()) {
+                        if (rsAsesor.next()) {
+                            // Si se encuentra un registro en la tabla asesor, redirigir a la vista asesor
+                            this.setVisible(false); // Cerrar la ventana de inicio de sesión
+                            vistaAsesor vas = new vistaAsesor(); // Abrir la vista del asesor
+                            vas.setVisible(true);
+                            return; // Salir del método para evitar la verificación adicional
+                        }
                     }
-
-                    // Cerrar el ResultSet y PreparedStatement para la consulta del administrador
-                    rsAdmin.close();
-                    psAdmin.close();
                 }
 
-                // Cerrar el ResultSet y PreparedStatement para la consulta del asesor
-                rsAsesor.close();
-                psAsesor.close();
+                // Verificar si es administrador
+                String sqlAdmin = "SELECT * FROM USUARIO_ADMINISTRADOR WHERE CEDULA = ? AND CONTRASENA = ?";
+                try (PreparedStatement psAdmin = cn.prepareStatement(sqlAdmin)) {
+                    psAdmin.setString(1, usuario);
+                    psAdmin.setString(2, password);
+                    try (ResultSet rsAdmin = psAdmin.executeQuery()) {
+                        if (rsAdmin.next()) {
+                            // Si se encuentra un registro en la tabla administrador, redirigir a la vista administrador
+                            this.setVisible(false); // Cerrar la ventana de inicio de sesión
+                            vistaAdministrador vad = new vistaAdministrador(); // Abrir la vista del administrador
+                            vad.setVisible(true);
+                            return; // Salir del método para evitar el mensaje de error
+                        }
+                    }
+                }
 
-            } catch (Exception e){
-                JOptionPane.showMessageDialog(null, "¡Error al iniciar sesion !"+e);
+                // Si no se encontró en ninguna tabla
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "¡Error al iniciar sesión! " + e.getMessage());
             }
 
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Debe completar los datos");
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

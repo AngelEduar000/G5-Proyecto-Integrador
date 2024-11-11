@@ -76,7 +76,7 @@ public class vistaAdministrador extends javax.swing.JFrame {
         jLabel1.setText("Bienvenido Administrador");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\unise\\Documents\\NetBeansProjects\\G5-Proyecto-Integrador\\ProyectoIntegrador\\ProyectoIntegrador\\src\\imagenes\\Diseño sin título (17).png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título (17).png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1024, 750));
 
         jMenu1.setText("File");
