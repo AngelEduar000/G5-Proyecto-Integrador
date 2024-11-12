@@ -38,5 +38,6 @@ public class ConexionBD {
 //        System.out.println("Iniciando la conexion a la base de datos");
 //        ConexionBD conexion = new ConexionBD();
 //        conexion.conectar();
+
 //   }
 //}
