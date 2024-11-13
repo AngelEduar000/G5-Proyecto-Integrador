@@ -12,7 +12,7 @@ public class Proyecto {
         String sql = "INSERT INTO PROYECTO (NOMBRE, NUMERO_TORRES) VALUES (?, ?)";
         
         // Usar try-with-resources para cerrar la conexión automáticamente
-        try (Connection cn = new ConexionBD().conectar();
+        try (Connection cn = new ConexionBD().conectarConstructora();
              PreparedStatement psProyecto = cn.prepareStatement(sql)) {
              
             // Establecer parámetros de manera segura

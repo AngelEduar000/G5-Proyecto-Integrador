@@ -19,7 +19,7 @@ public class inicioSesion extends javax.swing.JFrame {
      * Creates new form Vista
      */
     ConexionBD con = new ConexionBD();
-    Connection cn = con.conectar();
+    Connection cn = con.conectarLogin();
     
     
     public inicioSesion() {
@@ -120,7 +120,7 @@ public class inicioSesion extends javax.swing.JFrame {
         if (!usuario.equals("") && !password.equals("")) {
             try {
                 // Preparar la consulta para verificar si el usuario es asesor
-                String sqlAsesor = "SELECT * FROM USUARIO_ASESOR WHERE CEDULA = ? AND CONTRASENA = ?";
+                String sqlAsesor = "SELECT * FROM CONSTRUCTORA.USUARIO_ASESOR WHERE CEDULA = ? AND CONTRASENA = ?";
                 try (PreparedStatement psAsesor = cn.prepareStatement(sqlAsesor)) {
                     psAsesor.setString(1, usuario);
                     psAsesor.setString(2, password);
@@ -136,7 +136,7 @@ public class inicioSesion extends javax.swing.JFrame {
                 }
 
                 // Verificar si es administrador
-                String sqlAdmin = "SELECT * FROM USUARIO_ADMINISTRADOR WHERE CEDULA = ? AND CONTRASENA = ?";
+                String sqlAdmin = "SELECT * FROM CONSTRUCTORA.USUARIO_ADMINISTRADOR WHERE CEDULA = ? AND CONTRASENA = ?";
                 try (PreparedStatement psAdmin = cn.prepareStatement(sqlAdmin)) {
                     psAdmin.setString(1, usuario);
                     psAdmin.setString(2, password);
