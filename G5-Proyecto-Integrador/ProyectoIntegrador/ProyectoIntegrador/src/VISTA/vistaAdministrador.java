@@ -55,6 +55,11 @@ public class vistaAdministrador extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton1.setText("Editar Proyecto");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 230, -1));
 
         crearProyecto.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -96,6 +101,10 @@ public class vistaAdministrador extends javax.swing.JFrame {
         crearProyecto cPr = new crearProyecto();
         cPr.setVisible(true);
     }//GEN-LAST:event_crearProyectoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
