@@ -8,6 +8,16 @@ import Controlador.ConexionBD;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.*;
+
 /**
  *
  * @author unise
@@ -32,6 +42,7 @@ public class vistaAdministrador extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         crearProyecto = new javax.swing.JButton();
@@ -48,6 +59,14 @@ public class vistaAdministrador extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton3.setText("Eliminar Proyecto");
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 250, -1));
+
+        jButton4.setText("Generar Reporte");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, 230, 30));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton2.setText("Ver Proyecto");
@@ -106,6 +125,53 @@ public class vistaAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       Document documento = new Document();
+       try{
+           
+         String ruta = System.getProperty("user.home");
+         PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte.pdf" ));
+         documento.open();
+         
+         PdfPTable tabla = new PdfPTable(5);
+         
+         tabla.addCell("Codigo");
+         tabla.addCell("Codigo");
+         tabla.addCell("Codigo");
+         tabla.addCell("Codigo");
+         tabla.addCell("Codigo");
+         
+           try {
+               
+             Connection cn = DriverManager.getConnection("jdbc:oracle:thin:CONSTRUCTORA/CONSTRUCTORA@localhost:1521");
+             PreparedStatement pst = cn.prepareStatement("Select * from tab");
+             
+             ResultSet rs = pst.executeQuery();
+             
+             if(rs.next()){
+                 
+                 do {
+                     
+                     tabla.addCell(rs.getString(1));
+                     tabla.addCell(rs.getString(2));
+                     tabla.addCell(rs.getString(3));
+                     tabla.addCell(rs.getString(4));
+                     tabla.addCell(rs.getString(5));
+                     
+                 } while (rs.next());
+                 
+                 documento.add(tabla);
+                 
+             }
+             
+           } catch (DocumentException | SQLException e) {
+           }
+           documento.close();
+           JOptionPane.showMessageDialog(null,"Reporte Creado");
+       }catch(DocumentException | HeadlessException | FileNotFoundException e){
+       }   
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -146,6 +212,7 @@ public class vistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
