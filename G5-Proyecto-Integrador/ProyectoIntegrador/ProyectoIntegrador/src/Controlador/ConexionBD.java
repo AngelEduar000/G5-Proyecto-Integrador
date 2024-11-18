@@ -8,7 +8,7 @@ public class ConexionBD {
     // Método para conectar con el usuario constructora
     public Connection conectarConstructora(){
         try {
-            cn=DriverManager.getConnection("jdbc:oracle:thin:CONSTRUCTORA/CONSTRUCTORA@localhost:1521"); 
+            cn=DriverManager.getConnection("jdbc:oracle:thin:CONSTRUCTORA/CONSTRUCTORA@192.168.254.215:1521:orcl"); 
             if(cn != null){
                 DatabaseMetaData meta = cn.getMetaData();
                 System.out.println("Conectado a la base de datos como usuario constructora: " + meta.getDriverName());
@@ -22,7 +22,7 @@ public class ConexionBD {
     // Método para conectar con el usuario login
     public Connection conectarLogin(){
         try {
-            cn = DriverManager.getConnection("jdbc:oracle:thin:LOGIN/LOGIN@localhost:1521");
+            cn = DriverManager.getConnection("jdbc:oracle:thin:LOGIN21/LOGIN@192.168.254.215:1521:orcl");
             if(cn != null){
                 DatabaseMetaData meta = cn.getMetaData();
                 System.out.println("Conectado a la base de datos como usuario login: " + meta.getDriverName());
@@ -35,7 +35,7 @@ public class ConexionBD {
     
     public Connection conectarAsesor(){
         try {
-            cn = DriverManager.getConnection("jdbc:oracle:thin:ASESOR/ASESOR@localhost:1521");
+            cn = DriverManager.getConnection("jdbc:oracle:thin:ASESOR21/ASESOR21@192.168.254.215:1521:orcl");
             if(cn != null){
                 DatabaseMetaData meta = cn.getMetaData();
                 System.out.println("Conectado a la base de datos como usuario asesor: " + meta.getDriverName());
