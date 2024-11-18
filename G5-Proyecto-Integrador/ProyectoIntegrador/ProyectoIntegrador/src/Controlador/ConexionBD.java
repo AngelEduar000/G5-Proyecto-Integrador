@@ -32,4 +32,17 @@ public class ConexionBD {
         }
         return cn;
     }
+    
+    public Connection conectarAsesor(){
+        try {
+            cn = DriverManager.getConnection("jdbc:oracle:thin:ASESOR/ASESOR@localhost:1521");
+            if(cn != null){
+                DatabaseMetaData meta = cn.getMetaData();
+                System.out.println("Conectado a la base de datos como usuario asesor: " + meta.getDriverName());
+            }
+        } catch (Exception e) {
+            System.out.println("Error al conectar como asesor: " + e.getMessage());
+        }
+        return cn;
+    }
 }

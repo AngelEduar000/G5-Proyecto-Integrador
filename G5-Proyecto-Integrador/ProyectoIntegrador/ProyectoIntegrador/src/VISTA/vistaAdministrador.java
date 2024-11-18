@@ -3,12 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package VISTA;
-import java.sql.PreparedStatement;
 import Controlador.ConexionBD;
-import java.sql.Connection;
-import javax.swing.JOptionPane;
-import java.sql.ResultSet;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -16,7 +11,10 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.HeadlessException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,67 +39,82 @@ public class vistaAdministrador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        crearProyecto = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1024, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton3.setText("Eliminar Proyecto");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 250, -1));
-
-        jButton4.setText("Generar Reporte");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 570, 230, 30));
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton2.setText("Ver Proyecto");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 440, 230, -1));
-
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton1.setText("Editar Proyecto");
+        jButton1.setText("Gestionar Proyectos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 230, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
 
-        crearProyecto.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        crearProyecto.setText("Crear Proyecto");
-        crearProyecto.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton2.setText("Gestionar Torres");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearProyectoActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(crearProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 230, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, -1));
 
-        jLabel2.setBackground(new java.awt.Color(204, 204, 255));
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("Selecciones la opcion que desea realizar");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton3.setText("Gestionar Apartamentos");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, -1, -1));
+
+        jButton5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton5.setText("Generar Reporte de Venta");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 460, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Bienvenido Administrador");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título (17).png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1024, 750));
+        jButton6.setText("Volver");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 620, -1, -1));
+
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jButton7.setText("Generar Reporte de Pagos");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título (14).png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1030, 750));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -114,63 +127,136 @@ public class vistaAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void crearProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearProyectoActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
         this.setVisible(false);
-        crearProyecto cPr = new crearProyecto();
-        cPr.setVisible(true);
-    }//GEN-LAST:event_crearProyectoActionPerformed
+        gestionTorre gtr = new gestionTorre();
+        gtr.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+        gestionApartamento gAp = new gestionApartamento();
+        gAp.setVisible(true);
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        
+        Document documento = new Document();
+        
+        try{
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Informe Ventas.pdf"));
+            documento.open();
+            
+            PdfPTable tabla = new PdfPTable(6);
+            tabla.addCell("ID_VENTA");
+            tabla.addCell("ID_APARTAMENTO");
+            tabla.addCell("CEDULA_CLIENTE");
+            tabla.addCell("PRECIO_TOTAL_VENTA");
+            tabla.addCell("NUMERO_CUOTAS");
+            tabla.addCell("INTERESES");
+            
+            String sql = "SELECT * FROM VENTA";
+            
+            try(Connection cn = new ConexionBD().conectarConstructora();
+                PreparedStatement psProyecto = cn.prepareStatement(sql)){
+                
+                ResultSet rs = psProyecto.executeQuery();
+                
+                if(rs.next()){
+                    
+                    do{
+                        tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
+                        tabla.addCell(rs.getString(3));
+                        tabla.addCell(rs.getString(4));
+                        tabla.addCell(rs.getString(5));
+                        tabla.addCell(rs.getString(6));
+                    }while (rs.next());
+                    documento.add(tabla);
+                }
+                
+            }catch(Exception e){
+                
+            }
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte creado.");
+        }catch(DocumentException | HeadlessException | FileNotFoundException e){
+            
+        }
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        gestionProyecto gPr = new gestionProyecto();
+        gPr.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       Document documento = new Document();
-       try{
-           
-         String ruta = System.getProperty("user.home");
-         PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte.pdf" ));
-         documento.open();
-         
-         PdfPTable tabla = new PdfPTable(5);
-         
-         tabla.addCell("Codigo");
-         tabla.addCell("Codigo");
-         tabla.addCell("Codigo");
-         tabla.addCell("Codigo");
-         tabla.addCell("Codigo");
-         
-           try {
-               
-             Connection cn = DriverManager.getConnection("jdbc:oracle:thin:CONSTRUCTORA/CONSTRUCTORA@localhost:1521");
-             PreparedStatement pst = cn.prepareStatement("Select * from tab");
-             
-             ResultSet rs = pst.executeQuery();
-             
-             if(rs.next()){
-                 
-                 do {
-                     
-                     tabla.addCell(rs.getString(1));
-                     tabla.addCell(rs.getString(2));
-                     tabla.addCell(rs.getString(3));
-                     tabla.addCell(rs.getString(4));
-                     tabla.addCell(rs.getString(5));
-                     
-                 } while (rs.next());
-                 
-                 documento.add(tabla);
-                 
-             }
-             
-           } catch (DocumentException | SQLException e) {
-           }
-           documento.close();
-           JOptionPane.showMessageDialog(null,"Reporte Creado");
-       }catch(DocumentException | HeadlessException | FileNotFoundException e){
-       }   
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+
+        this.setVisible(false);
+        inicioSesion gTr = new inicioSesion();
+        gTr.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        
+        Document documento = new Document();
+        
+        try{
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Informe Pagos.pdf"));
+            documento.open();
+            
+            PdfPTable tabla = new PdfPTable(6);
+            tabla.addCell("ID_PAGO");
+            tabla.addCell("ID_VENTA");
+            tabla.addCell("CEDULA_CLIENTE");
+            tabla.addCell("CEDULA_ASESOR");
+            tabla.addCell("VALORPAGO");
+            tabla.addCell("FECHAPAGO");
+            
+            String sql = "SELECT * FROM PAGO";
+            
+            try(Connection cn = new ConexionBD().conectarConstructora();
+                PreparedStatement psProyecto = cn.prepareStatement(sql)){
+                
+                ResultSet rs = psProyecto.executeQuery();
+                
+                if(rs.next()){
+                    
+                    do{
+                        tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
+                        tabla.addCell(rs.getString(3));
+                        tabla.addCell(rs.getString(4));
+                        tabla.addCell(rs.getString(5));
+                        tabla.addCell(rs.getString(6));
+                    }while (rs.next());
+                    documento.add(tabla);
+                }
+                
+            }catch(Exception e){
+                
+            }
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte creado.");
+        }catch(DocumentException | HeadlessException | FileNotFoundException e){
+            
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +269,7 @@ public class vistaAdministrador extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -208,14 +294,14 @@ public class vistaAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton crearProyecto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

@@ -144,8 +144,8 @@ public class inicioSesion extends javax.swing.JFrame {
                         if (rsAdmin.next()) {
                             // Si se encuentra un registro en la tabla administrador, redirigir a la vista administrador
                             this.setVisible(false); // Cerrar la ventana de inicio de sesión
-                            vistaAdministrador vad = new vistaAdministrador(); // Abrir la vista del administrador
-                            vad.setVisible(true);
+                            vistaAdministrador vAd = new vistaAdministrador(); // Abrir la vista del administrador
+                            vAd.setVisible(true);
                             return; // Salir del método para evitar el mensaje de error
                         }
                     }

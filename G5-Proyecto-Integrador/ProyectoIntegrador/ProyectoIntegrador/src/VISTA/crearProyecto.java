@@ -36,6 +36,7 @@ public class crearProyecto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtNumeroTorres = new javax.swing.JTextField();
         registrar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -76,6 +77,14 @@ public class crearProyecto extends javax.swing.JFrame {
         });
         getContentPane().add(registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 430, -1, -1));
 
+        jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 700, -1, -1));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño sin título (14).png"))); // NOI18N
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, -4, 1030, 750));
 
@@ -103,7 +112,21 @@ public class crearProyecto extends javax.swing.JFrame {
         Proyecto proyecto = new Proyecto();
         // Llamar al método agregarProyecto
         proyecto.agregarProyecto(nombreProyecto, numeroTorres);  
+        
+        this.setVisible(false);
+        gestionProyecto gPr = new gestionProyecto();
+        gPr.setVisible(true);
+        
     }//GEN-LAST:event_registrarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        this.setVisible(false);
+        gestionProyecto gPr = new gestionProyecto();
+        gPr.setVisible(true);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +164,7 @@ public class crearProyecto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
