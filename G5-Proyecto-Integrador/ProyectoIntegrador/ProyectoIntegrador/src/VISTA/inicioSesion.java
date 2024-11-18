@@ -57,7 +57,7 @@ public class inicioSesion extends javax.swing.JFrame {
         jLabel5.setText("Construcciones Urbanas C.A.S.");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\unise\\Downloads\\Diseño-sin-título-(15)-Photoroom.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Diseño-sin-título-(15)-Photoroom.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
